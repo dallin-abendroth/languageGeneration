@@ -28,30 +28,54 @@ data Consonant = VlBilabialPlosive                                -- p
                deriving (Enum, Bounded)
 
 getConsMappings :: Consonant -> [[Char]]
-getConsMappings VlBilabialPlosive            = ["p"]                                                   -- p
-getConsMappings VdBilabialPlosive            = ["b"]                                                   -- b
-getConsMappings VdBilabialNasal              = ["m"]                                                   -- m
-getConsMappings VdLabiodentalNasal           = ["m"]                                                   -- ɱ
-getConsMappings VlLabiodentalFricative       = ["f","ph"]                                              -- f
-getConsMappings VdLabiodentalFricative       = ["v"]                                                   -- v
-getConsMappings VlAlveolarPlosive            = ["t"]                               -- as in 'stay'     -- t
-getConsMappings VdAlveolarPlosive            = ["d"]                                                   -- d
-getConsMappings VdAlveolarNasal              = ["n"]                                                   -- n
-getConsMappings VdAlveolarTrill              = ["r"]                               -- "rolling r"      -- r
-getConsMappings VlDentalFricative            = ["th"]                              -- as in 'thing'    -- θ
-getConsMappings VdDentalFricative            = ["th","ḍ"]                          -- as in 'that'     -- ð
-getConsMappings VlAlveolarFricative          = ["s","c", "sc"]                                         -- s
-getConsMappings VdAlveolarFricative          = ["z","x"]                                               -- z
-getConsMappings VlPostalveolarFricative      = ["sh","š","x"]                      -- as in 'sharp'    -- ʃ
-getConsMappings VdPostalveolarFricative      = ["sh","g","s","j","zh","ž","ż","x"] -- as in 'pleasure' -- ʒ
-getConsMappings VdAlveolarApproximant        = ["r"]                               -- as in 'red'      -- ɹ
-getConsMappings VdLateralAlveolarApproximant = ["l"]                                                   -- l
-getConsMappings VdPalatalApproximant         = ["y","j"]                           -- as in 'yes'      -- j
-getConsMappings VlVelarPlosive               = ["k","c","ck","ch","ç","q"]         -- as in 'keep'     -- k
-getConsMappings VdVelarPlosive               = ["g"]                               -- as in 'go'       -- g
-getConsMappings VdVelarNasal                 = ["ng","n","g"]                      -- as in 'singing'  -- ŋ
-getConsMappings VlVelarFricative             = ["ch","k","c","ḳ","q"]              -- as in 'loch'     -- x
-getConsMappings VlGlottalFricative           = ["h","j"]                           -- as in 'hear'     -- h
+getConsMappings VlBilabialPlosive            = 
+    ["p"]                                                   -- p
+getConsMappings VdBilabialPlosive            = 
+    ["b"]                                                   -- b
+getConsMappings VdBilabialNasal              = 
+    ["m"]                                                   -- m
+getConsMappings VdLabiodentalNasal           = 
+    ["m"]                                                   -- ɱ
+getConsMappings VlLabiodentalFricative       = 
+    ["f","ph"]                                              -- f
+getConsMappings VdLabiodentalFricative       = 
+    ["v"]                                                   -- v
+getConsMappings VlAlveolarPlosive            = 
+    ["t"]                               -- as in 'stay'     -- t
+getConsMappings VdAlveolarPlosive            = 
+    ["d"]                                                   -- d
+getConsMappings VdAlveolarNasal              = 
+    ["n"]                                                   -- n
+getConsMappings VdAlveolarTrill              = 
+    ["r"]                               -- "rolling r"      -- r
+getConsMappings VlDentalFricative            = 
+    ["th"]                              -- as in 'thing'    -- θ
+getConsMappings VdDentalFricative            = 
+    ["th","ḍ"]                          -- as in 'that'     -- ð
+getConsMappings VlAlveolarFricative          = 
+    ["s","c","sc"]                                          -- s
+getConsMappings VdAlveolarFricative          = 
+    ["z","x"]                                               -- z
+getConsMappings VlPostalveolarFricative      = 
+    ["sh","š","x"]                      -- as in 'sharp'    -- ʃ
+getConsMappings VdPostalveolarFricative      = 
+    ["sh","g","s","j","zh","ž","ż","x"] -- as in 'pleasure' -- ʒ
+getConsMappings VdAlveolarApproximant        = 
+    ["r"]                               -- as in 'red'      -- ɹ
+getConsMappings VdLateralAlveolarApproximant = 
+    ["l"]                                                   -- l
+getConsMappings VdPalatalApproximant         = 
+    ["y","j"]                           -- as in 'yes'      -- j
+getConsMappings VlVelarPlosive               = 
+    ["k","c","ck","ch","ç","q"]         -- as in 'keep'     -- k
+getConsMappings VdVelarPlosive               = 
+    ["g"]                               -- as in 'go'       -- g
+getConsMappings VdVelarNasal                 = 
+    ["ng","n","g"]                      -- as in 'singing'  -- ŋ
+getConsMappings VlVelarFricative             = 
+    ["ch","k","c","ḳ","q"]              -- as in 'loch'     -- x
+getConsMappings VlGlottalFricative           = 
+    ["h","j"]                           -- as in 'hear'     -- h
 -- ignore these for now
 -- getConsMappings VdBilabialTrill               = ["<consonant-ex>"] -- ʙ
 -- getConsMappings VlBilabialFricative           = ["<consonant-ex>"] -- ɸ
@@ -104,16 +128,26 @@ data Vowel = CloseFrontUnrounded        -- as in 'see'           -- i
            deriving (Enum, Bounded)
 
 getVowelMappings :: Vowel -> [[Char]]
-getVowelMappings CloseFrontUnrounded        = ["i","e","y"]      -- as in 'see'           -- i
-getVowelMappings LoweredCloseFrontUnrounded = ["i","e","y"]      -- as in 'pit'           -- ɪ
-getVowelMappings OpenMidFrontUnrounded      = ["e"]              -- as in 'get'           -- ɛ
-getVowelMappings RaisedOpenFrontUnrounded   = ["a"]              -- as in 'cat'           -- æ
-getVowelMappings MidCentralUnrounded        = ["a","u","uh","o"] -- as in 'a' or 'uh'     -- ə
-getVowelMappings CloseBackRounded           = ["u","ou","ew"]    -- as in 'you'           -- u
-getVowelMappings LoweredCloseBackRounded    = ["u"]              -- as in 'put'           -- ʊ
-getVowelMappings OpenMidBackUnrounded       = ["u","o"]          -- as in 'but'           -- ʌ
-getVowelMappings OpenMidBackRounded         = ["a","o","au"]     -- as in 'dawn'          -- ɔ
-getVowelMappings OpenBackRounded            = ["o","a"]          -- as in (British) 'pot' -- ɒ
+getVowelMappings CloseFrontUnrounded        = 
+    ["i","e","y"]      -- as in 'see'           -- i
+getVowelMappings LoweredCloseFrontUnrounded = 
+    ["i","e","y"]      -- as in 'pit'           -- ɪ
+getVowelMappings OpenMidFrontUnrounded      = 
+    ["e"]              -- as in 'get'           -- ɛ
+getVowelMappings RaisedOpenFrontUnrounded   = 
+    ["a"]              -- as in 'cat'           -- æ
+getVowelMappings MidCentralUnrounded        = 
+    ["a","u","uh","o"] -- as in 'a' or 'uh'     -- ə
+getVowelMappings CloseBackRounded           = 
+    ["u","ou","ew"]    -- as in 'you'           -- u
+getVowelMappings LoweredCloseBackRounded    = 
+    ["u"]              -- as in 'put'           -- ʊ
+getVowelMappings OpenMidBackUnrounded       = 
+    ["u","o"]          -- as in 'but'           -- ʌ
+getVowelMappings OpenMidBackRounded         = 
+    ["a","o","au"]     -- as in 'dawn'          -- ɔ
+getVowelMappings OpenBackRounded            = 
+    ["o","a"]          -- as in (British) 'pot' -- ɒ
 -- ignore these for now
 -- getVowelMappings CloseFrontRounded          = ["<vowel-ex>"] -- y
 -- getVowelMappings LoweredCloseFrontRounded   = ["<vowel-ex>"] -- ʏ
