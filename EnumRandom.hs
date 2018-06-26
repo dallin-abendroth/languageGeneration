@@ -5,7 +5,7 @@ module EnumRandom where
 import System.Random
 
 newtype Enum' a = Enum' a
-  deriving (Bounded, Enum, Show)
+  deriving (Bounded, Enum)
 
 enumRandomR :: (RandomGen g, Enum e) => (e, e) -> g -> (e, g)
 enumRandomR  (lo,hi) gen = 

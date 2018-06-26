@@ -11,5 +11,6 @@ getRandomSeed = do
 main = do
   seed <- getRandomSeed
   putStrLn $ "Seed: " ++ (show seed)
-  let (syl,_) = manyRandomSyllables (mkStdGen seed) 10
-  mapM_ (\x -> putStrLn (show x)) syl
+  let (syl,g') = manyRandomSyllables (mkStdGen seed) 10
+  let (ortho,g'') = genOrthography g'
+  mapM_ (\x -> putStrLn ((show x)++" = "++(romanizeSyllable x ortho))) syl

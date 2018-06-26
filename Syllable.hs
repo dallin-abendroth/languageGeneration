@@ -1,5 +1,7 @@
 module Syllable where
 
+import Data.Ix
+
 -- Taken from IPA Pulmonic Consonants
 data Consonant = VlBilabialPlosive                                -- p
                | VdBilabialPlosive                                -- b
@@ -25,7 +27,7 @@ data Consonant = VlBilabialPlosive                                -- p
                | VdVelarNasal                 -- as in 'singing'  -- ŋ
                | VlVelarFricative             -- as in 'loch'     -- x
                | VlGlottalFricative           -- as in 'hear'     -- h
-               deriving (Enum, Bounded)
+               deriving (Enum, Bounded, Eq, Ord, Ix, Show)
 
 getConsMappings :: Consonant -> [[Char]]
 getConsMappings VlBilabialPlosive            = 
@@ -76,42 +78,44 @@ getConsMappings VlVelarFricative             =
     ["ch","k","c","ḳ","q"]              -- as in 'loch'     -- x
 getConsMappings VlGlottalFricative           = 
     ["h","j"]                           -- as in 'hear'     -- h
+
 -- ignore these for now
--- getConsMappings VdBilabialTrill               = ["<consonant-ex>"] -- ʙ
--- getConsMappings VlBilabialFricative           = ["<consonant-ex>"] -- ɸ
--- getConsMappings VdBilabialFricative           = ["<consonant-ex>"] -- β
--- getConsMappings VdLabiodentalFlap             = ["<consonant-ex>"] -- ⱱ
--- getConsMappings VdLabiodentalApproximant      = ["<consonant-ex>"] -- ʋ
--- getConsMappings VdAlveolarTap                 = ["<consonant-ex>"] -- ɾ
--- getConsMappings VlLateralAlveolarFricative    = ["<consonant-ex>"] -- ɬ
--- getConsMappings VdLateralAlveolarFricative    = ["<consonant-ex>"] -- ɮ
--- getConsMappings VlRetroflexPlosive            = ["<consonant-ex>"] -- ʈ
--- getConsMappings VdRetroflexPlosive            = ["<consonant-ex>"] -- ɖ
--- getConsMappings VdRetroflexNasal              = ["<consonant-ex>"] -- ɳ
--- getConsMappings VdRetroflexFlap               = ["<consonant-ex>"] -- ɽ
--- getConsMappings VlRetroflexFricative          = ["<consonant-ex>"] -- ʂ
--- getConsMappings VdRetroflexFricative          = ["<consonant-ex>"] -- ʐ
--- getConsMappings VdRetroflexApproximant        = ["<consonant-ex>"] -- ɻ
--- getConsMappings VdRetroflexLateralApproximant = ["<consonant-ex>"] -- ɭ
--- getConsMappings VlPalatalPlosive              = ["<consonant-ex>"] -- c
--- getConsMappings VdPalatalPlosive              = ["<consonant-ex>"] -- ɟ
--- getConsMappings VdPalatalNasal                = ["<consonant-ex>"] -- ɲ
--- getConsMappings VlPalatalFricative            = ["<consonant-ex>"] -- ç
--- getConsMappings VdPalatalFricative            = ["<consonant-ex>"] -- ʝ
--- getConsMappings VdVelarFricative              = ["<consonant-ex>"] -- ɣ
--- getConsMappings VdVelarApproximant            = ["<consonant-ex>"] -- ɰ
--- getConsMappings VdVelarLateralApproximant     = ["<consonant-ex>"] -- ʟ
--- getConsMappings VlUvularPlosive               = ["<consonant-ex>"] -- q
--- getConsMappings VdUvularPlosive               = ["<consonant-ex>"] -- ɢ
--- getConsMappings VdUvularNasal                 = ["<consonant-ex>"] -- ɴ
--- getConsMappings VdUvularTrill                 = ["<consonant-ex>"] -- ʀ
--- getConsMappings VlUvularFricative             = ["<consonant-ex>"] -- χ
--- getConsMappings VdUvularFricative             = ["<consonant-ex>"] -- ʁ
--- getConsMappings VlPharyngealFricative         = ["<consonant-ex>"] -- ħ
--- getConsMappings VdPharyngealFricative         = ["<consonant-ex>"] -- ʕ
--- getConsMappings VlGlottalPlosive              = ["<consonant-ex>"] -- ʔ
--- getConsMappings VdPalatalLateralApproximant   = ["<consonant-ex>"] -- ʎ
--- getConsMappings VdGlottalFricative            = ["<consonant-ex>"] -- ɦ
+--
+-- VdBilabialTrill               -- ʙ
+-- VlBilabialFricative           -- ɸ
+-- VdBilabialFricative           -- β
+-- VdLabiodentalFlap             -- ⱱ
+-- VdLabiodentalApproximant      -- ʋ
+-- VdAlveolarTap                 -- ɾ
+-- VlLateralAlveolarFricative    -- ɬ
+-- VdLateralAlveolarFricative    -- ɮ
+-- VlRetroflexPlosive            -- ʈ
+-- VdRetroflexPlosive            -- ɖ
+-- VdRetroflexNasal              -- ɳ
+-- VdRetroflexFlap               -- ɽ
+-- VlRetroflexFricative          -- ʂ
+-- VdRetroflexFricative          -- ʐ
+-- VdRetroflexApproximant        -- ɻ
+-- VdRetroflexLateralApproximant -- ɭ
+-- VlPalatalPlosive              -- c
+-- VdPalatalPlosive              -- ɟ
+-- VdPalatalNasal                -- ɲ
+-- VlPalatalFricative            -- ç
+-- VdPalatalFricative            -- ʝ
+-- VdVelarFricative              -- ɣ
+-- VdVelarApproximant            -- ɰ
+-- VdVelarLateralApproximant     -- ʟ
+-- VlUvularPlosive               -- q
+-- VdUvularPlosive               -- ɢ
+-- VdUvularNasal                 -- ɴ
+-- VdUvularTrill                 -- ʀ
+-- VlUvularFricative             -- χ
+-- VdUvularFricative             -- ʁ
+-- VlPharyngealFricative         -- ħ
+-- VdPharyngealFricative         -- ʕ
+-- VlGlottalPlosive              -- ʔ
+-- VdPalatalLateralApproximant   -- ʎ
+-- VdGlottalFricative            -- ɦ
 
 
 -- IPA Vowels
@@ -125,48 +129,51 @@ data Vowel = CloseFrontUnrounded        -- as in 'see'           -- i
            | OpenMidBackUnrounded       -- as in 'but'           -- ʌ
            | OpenMidBackRounded         -- as in 'dawn'          -- ɔ
            | OpenBackRounded            -- as in (British) 'pot' -- ɒ
-           deriving (Enum, Bounded)
+           deriving (Enum, Bounded, Eq, Ord, Ix, Show)
 
 getVowelMappings :: Vowel -> [[Char]]
-getVowelMappings CloseFrontUnrounded        = 
-    ["i","e","y"]      -- as in 'see'           -- i
-getVowelMappings LoweredCloseFrontUnrounded = 
-    ["i","e","y"]      -- as in 'pit'           -- ɪ
-getVowelMappings OpenMidFrontUnrounded      = 
-    ["e"]              -- as in 'get'           -- ɛ
-getVowelMappings RaisedOpenFrontUnrounded   = 
-    ["a"]              -- as in 'cat'           -- æ
-getVowelMappings MidCentralUnrounded        = 
-    ["a","u","uh","o"] -- as in 'a' or 'uh'     -- ə
-getVowelMappings CloseBackRounded           = 
-    ["u","ou","ew"]    -- as in 'you'           -- u
-getVowelMappings LoweredCloseBackRounded    = 
-    ["u"]              -- as in 'put'           -- ʊ
-getVowelMappings OpenMidBackUnrounded       = 
-    ["u","o"]          -- as in 'but'           -- ʌ
-getVowelMappings OpenMidBackRounded         = 
-    ["a","o","au"]     -- as in 'dawn'          -- ɔ
-getVowelMappings OpenBackRounded            = 
-    ["o","a"]          -- as in (British) 'pot' -- ɒ
+getVowelMappings CloseFrontUnrounded        = -- as in 'see'           -- i
+    ["i","ī","í","ǐ","ì","î","e","ē","é","ě","è","ê","y"]      
+getVowelMappings LoweredCloseFrontUnrounded = -- as in 'pit'           -- ɪ
+    ["i","ī","í","ǐ","ì","î","e","ē","é","ě","è","ê","y"]      
+getVowelMappings OpenMidFrontUnrounded      = -- as in 'get'           -- ɛ
+    ["e","ē","é","ě","è","ê"]              
+getVowelMappings RaisedOpenFrontUnrounded   = -- as in 'cat'           -- æ
+    ["a","ā","ǎ","à","á","â"]              
+getVowelMappings MidCentralUnrounded        = -- as in 'a' or 'uh'     -- ə
+    ["a","ā","ǎ","à","á","â","u","ū","ǖ","ú","ǘ","ǔ","ǚ","ù","ǜ","û"
+    ,"uh","o","ō","ó","ǒ","ò","ô","e","ē","é","ě","è","ê"] 
+getVowelMappings CloseBackRounded           = -- as in 'you'           -- u
+    ["u","ū","ǖ","ú","ǘ","ǔ","ǚ","ù","ǜ","û","ou","ew"]    
+getVowelMappings LoweredCloseBackRounded    = -- as in 'put'           -- ʊ
+    ["u","ū","ǖ","ú","ǘ","ǔ","ǚ","ù","ǜ","û","ou"]              
+getVowelMappings OpenMidBackUnrounded       = -- as in 'but'           -- ʌ
+    ["u","ū","ǖ","ú","ǘ","ǔ","ǚ","ù","ǜ","û","o","ō","ó","ǒ","ò","ô"]          
+getVowelMappings OpenMidBackRounded         = -- as in 'dawn'          -- ɔ
+    ["a","ā","ǎ","à","á","â","o","ō","ó","ǒ","ò","ô","au","ao"]     
+getVowelMappings OpenBackRounded            = -- as in (British) 'pot' -- ɒ
+    ["o","ō","ó","ǒ","ò","ô","a","ā","ǎ","à","á","â"]          
+
 -- ignore these for now
--- getVowelMappings CloseFrontRounded          = ["<vowel-ex>"] -- y
--- getVowelMappings LoweredCloseFrontRounded   = ["<vowel-ex>"] -- ʏ
--- getVowelMappings CloseMidFrontUnrounded     = ["<vowel-ex>"] -- e
--- getVowelMappings CloseMidFrontRounded       = ["<vowel-ex>"] -- ø
--- getVowelMappings OpenMidFrontRounded        = ["<vowel-ex>"] -- œ
--- getVowelMappings OpenFrontUnrounded         = ["<vowel-ex>"] -- a
--- getVowelMappings OpenFrontRounded           = ["<vowel-ex>"] -- ɶ
--- getVowelMappings CloseCentralUnrounded      = ["<vowel-ex>"] -- ɨ
--- getVowelMappings CloseCentralRounded        = ["<vowel-ex>"] -- ʉ
--- getVowelMappings CloseMidCentralUnrounded   = ["<vowel-ex>"] -- ɘ
--- getVowelMappings CloseMidCentralRounded     = ["<vowel-ex>"] -- ɵ
--- getVowelMappings OpenMidCentralUnrounded    = ["<vowel-ex>"] -- ɜ
--- getVowelMappings OpenMidCentralRounded      = ["<vowel-ex>"] -- ɞ
--- getVowelMappings RaisedOpenCentralUnrounded = ["<vowel-ex>"] -- ɐ
--- getVowelMappings CloseBackUnrounded         = ["<vowel-ex>"] -- ɯ
--- getVowelMappings CloseMidBackUnrounded      = ["<vowel-ex>"] -- ɤ
--- getVowelMappings CloseMidBackRounded        = ["<vowel-ex>"] -- o
--- getVowelMappings OpenBackUnrounded          = ["<vowel-ex>"] -- ɑ
+--
+-- CloseFrontRounded          -- y
+-- LoweredCloseFrontRounded   -- ʏ
+-- CloseMidFrontUnrounded     -- e
+-- CloseMidFrontRounded       -- ø
+-- OpenMidFrontRounded        -- œ
+-- OpenFrontUnrounded         -- a
+-- OpenFrontRounded           -- ɶ
+-- CloseCentralUnrounded      -- ɨ
+-- CloseCentralRounded        -- ʉ
+-- CloseMidCentralUnrounded   -- ɘ
+-- CloseMidCentralRounded     -- ɵ
+-- OpenMidCentralUnrounded    -- ɜ
+-- OpenMidCentralRounded      -- ɞ
+-- RaisedOpenCentralUnrounded -- ɐ
+-- CloseBackUnrounded         -- ɯ
+-- CloseMidBackUnrounded      -- ɤ
+-- CloseMidBackRounded        -- o
+-- OpenBackUnrounded          -- ɑ
 
 data Phoneme = ConsonantPhoneme Consonant
              | VowelPhoneme Vowel
@@ -175,6 +182,7 @@ getPotentialRomanizations :: Phoneme -> [[Char]]
 getPotentialRomanizations (ConsonantPhoneme c) = getConsMappings c
 getPotentialRomanizations (VowelPhoneme v)     = getVowelMappings v
 
-data Syllable = Syllable Consonant Vowel Consonant
+data Syllable = Syllable Consonant Vowel Consonant 
+
 instance Show Syllable where
-    show (Syllable c1 v c2) = show c1 ++ show v ++ show c2
+    show (Syllable c1 v c2) = "("++show c1 ++" "++ show v ++" "++ show c2++")"
