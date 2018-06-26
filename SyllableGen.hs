@@ -6,7 +6,7 @@ import System.Random
 import Data.Array
 
 chooseRandomItem :: StdGen -> [a] -> (a, StdGen)
-chooseRandomItem g xs = let (index, g') = randomR (0, length xs) g
+chooseRandomItem g xs = let (index, g') = randomR (0, (length xs - 1)) g
                             item = xs !! index
                         in (item, g')
 
