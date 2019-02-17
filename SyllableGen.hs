@@ -10,13 +10,13 @@ chooseRandomItem g xs = let (index, g') = randomR (0, (length xs - 1)) g
                             item = xs !! index
                         in (item, g')
 
-generateConsonantOrthography :: StdGen -> [Consonant] -> [(Consonant, String)] -> ([(Consonant, String)], StdGen)
-generateConsonantOrthography g rest acc = 
+genOrthographyRec :: (Enum e, Bounded e, Ix e) => StdGen -> [Phoneme] -> [(e, String)] -> ([(e, String)], StdGen)
+genOrthography g rest acc = 
       case rest of 
        [] -> (acc, g)
        x:xs -> let (y, g') = chooseRandomItem g 
                                 $ getConsMappings x
-               in generateConsonantOrthography g' xs ((x,y):acc)
+               in genOrthography g' xs ((x,y):acc)
 
 generateVowelOrthography :: StdGen -> [Vowel] -> [(Vowel, String)] -> ([(Vowel, String)], StdGen)
 generateVowelOrthography g rest acc = 
